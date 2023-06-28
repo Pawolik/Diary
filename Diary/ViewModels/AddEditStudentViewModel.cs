@@ -87,6 +87,11 @@ namespace Diary.ViewModels
 
         private void Confirm(object obj)
         {
+            if (!Student.IsValid)
+            {
+                return;
+            }
+
             if (!IsUpdate)
             {
                 AddStudent();
@@ -95,7 +100,7 @@ namespace Diary.ViewModels
             {
                 UpdateStudent();
             }
-            //logika
+
             CloseWindow(obj as Window);
         }
 

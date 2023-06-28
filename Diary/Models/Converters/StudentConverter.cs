@@ -23,7 +23,7 @@ namespace Diary.Models.Converters
                 Activities = model.Activities,
                 Group = new GroupWrapper
                 {
-                    Id = model.Id,
+                    Id = model.Group.Id,
                     Name = model.Group.Name
                 },
                 Maths = string.Join(", ", model.Ratings

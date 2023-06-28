@@ -79,7 +79,7 @@ namespace Diary
 
         private static List<Rating> GetStudentRatings(Student student, ApplicationDbContext context)
         {
-            return context.Ratings.Where(x => x.SubjectId == student.Id).ToList();
+            return context.Ratings.Where(x => x.StudentId == student.Id).ToList();
         }
 
         private void UpdateStudentProperties(ApplicationDbContext context, Student student)
@@ -109,7 +109,7 @@ namespace Diary
             {
                 var ratingToDelete = context.Ratings
                 .First(y => y.Rate == x &&
-                y.SubjectId == student.Id &&
+                y.StudentId == student.Id &&
                 y.SubjectId == (int)subject);
 
                 context.Ratings.Remove(ratingToDelete);
@@ -120,8 +120,8 @@ namespace Diary
                 var ratingToAdd = new Rating
                 {
                     Rate = x,
-                    SubjectId = student.Id,
-                    StudentId = (int)subject
+                    StudentId = student.Id,
+                    SubjectId = (int)subject
                 };
                 context.Ratings.Add(ratingToAdd);
             });
