@@ -6,13 +6,25 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using System.Windows;
+using Diary.Models.Domains;
 
 namespace Diary.ViewModels
 {
     public class SettingsWindowViewModel :ViewModelBase
     {
+        public SettingsData Settings { get; set; }
+
         public SettingsWindowViewModel()
         {
+            Settings = new SettingsData
+            {
+                ServerAddress = Properties.Settings.Default.serverAddress,
+                ServerName = Properties.Settings.Default.serverName,
+                DatabaseName = Properties.Settings.Default.databaseName,
+                Username = Properties.Settings.Default.username,
+                Password = Properties.Settings.Default.password
+            };
+
             CloseCommand = new RelayCommand(Close);
             ConfirmCommand = new RelayCommand(SaveSettingsAndClose);
         }
@@ -34,29 +46,17 @@ namespace Diary.ViewModels
 
         private void SaveSettingsAndClose(object parameter)
         {
-            // Tutaj możesz dodać logikę zapisywania ustawień (odczytaj wartości z TextBoxów itp.)
-            // Następnie zamknij okno
             if (parameter is Window window)
             {
-                // Pamiętaj, żeby upewnić się, że wprowadzone dane są poprawne, zanim zapiszesz ustawienia
-                // Możesz również wyświetlić komunikat o błędzie, jeśli coś jest nieprawidłowe.
-                // Zostawiam to Tobie jako zadanie do zaimplementowania.
+                Properties.Settings.Default.serverAddress = Settings.ServerAddress;
+                Properties.Settings.Default.serverName = Settings.ServerName;
+                Properties.Settings.Default.databaseName = Settings.DatabaseName;
+                Properties.Settings.Default.username = Settings.Username;
+                Properties.Settings.Default.password = Settings.Password;
 
-                // Zapisujemy wartości do ustawień użytkownika
-                // (Zakładając, że masz te wartości dostępne jako właściwości w ViewModelu)
-                /*Properties.Settings.Default.serverAddress = ServerAddress;
-                Properties.Settings.Default.serverName = ServerName;
-                Properties.Settings.Default.databaseName = DatabaseName;
-                Properties.Settings.Default.username = Username;
-                Properties.Settings.Default.password = Password;*/
-
-                // Zapisujemy zmiany w ustawieniach
                 Properties.Settings.Default.Save();
 
-                // Zamknięcie okna
                 window.Close();
-
-
                 RestartApplication();
             }
         }
@@ -67,6 +67,5 @@ namespace Diary.ViewModels
             Application.Current.Shutdown();
         }
 
-        // Reszta kodu klasy, włącznie z OnPropertyChanged itp.
     }
 }
