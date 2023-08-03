@@ -1,4 +1,5 @@
 ﻿using MahApps.Metro.Controls;
+using Diary.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,6 +24,8 @@ namespace Diary.Views
         public SettingsWindow()
         {
             InitializeComponent();
+            DataContext = new SettingsWindowViewModel();
+
         }
     }
 }
