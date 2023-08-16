@@ -1,16 +1,13 @@
 ﻿using Diary.Models.Domains;
-using Diary.Properties;
 using Diary.Views;
 using MahApps.Metro.Controls;
 using MahApps.Metro.Controls.Dialogs;
 using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Data;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Threading.Tasks;
 using System.Windows;
+using Diary.Commands;
+using System.Windows.Input;
+
 
 namespace Diary
 {
@@ -32,17 +29,17 @@ namespace Diary
         protected override void OnStartup(StartupEventArgs e)
         {
             base.OnStartup(e);
+            
 
             Settings = new SettingsData
             {
-                ServerAddress = Properties.Settings.Default.serverAddress,
-                ServerName = Properties.Settings.Default.serverName,
-                DatabaseName = Properties.Settings.Default.databaseName,
-                Username = Properties.Settings.Default.username,
-                Password = Properties.Settings.Default.password
+                ServerAddress = Diary.Properties.Settings.Default.serverAddress,
+                ServerName = Diary.Properties.Settings.Default.serverName,
+                DatabaseName = Diary.Properties.Settings.Default.databaseName,
+                Username = Diary.Properties.Settings.Default.username,
+                Password = Diary.Properties.Settings.Default.password
             };
 
-            // Kod sprawdzania i walidacji ustawień użytkownika
             if (!IsValidSettings())
             {
                 var result = MessageBox.Show("Nie można połączyć się z bazą danych za pomocą obecnych ustawień. Czy chcesz zmienić ustawienia?", "Błąd połączenia", MessageBoxButton.YesNo, MessageBoxImage.Error);
@@ -62,7 +59,7 @@ namespace Diary
         {
             bool isValid = true;
 
-            string connectionString = $"Data Source={Settings.ServerAddress};Initial Catalog={Settings.DatabaseName};User ID={Settings.Username};Password={Settings.Password};";
+            string connectionString = $"Data Source={Settings.ServerAddress}\\{Settings.ServerName};Initial Catalog={Settings.DatabaseName};User ID={Settings.Username};Password={Settings.Password};";
 
             try
             {

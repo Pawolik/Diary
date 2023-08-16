@@ -1,6 +1,4 @@
-﻿using Diary.ViewModels;
-using MahApps.Metro.Controls;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,24 +10,18 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Diary.Views
+namespace Diary
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for SplashScreenWindow.xaml
     /// </summary>
-    public partial class MainWindow : MetroWindow
+    public partial class SplashScreenWindow : Window
     {
-        public MainWindow()
+        public SplashScreenWindow()
         {
-            SplashScreenWindow splashScreen = new SplashScreenWindow();
-            splashScreen.Show();
             InitializeComponent();
-            DataContext = new MainViewModel();
-            splashScreen.Close();
         }
-
     }
 }

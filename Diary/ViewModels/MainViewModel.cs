@@ -87,8 +87,6 @@ namespace Diary.ViewModels
             }
         }
 
-
-
         private void RefreshStudents(object obj)
         {
             RefreshDiary();
@@ -150,8 +148,5 @@ namespace Diary.ViewModels
         {
             Students = new ObservableCollection<StudentWrapper>(_repository.GetStudents(SelectedGroupId));
         }
-
-        
-
     }
 }
